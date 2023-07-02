@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>View profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/b99b726463.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div>
+    <div class="grid m-auto max-w-max">
+
+      <div class="mt-5">
+        <div class="shadow">
+          <div class="px-4 py-5 bg-white space-y-6">
+
+            <div class="divide-y divide-gray-200">
+              <div th:each="user : ${users}">
+                <div class="grid grid-cols-3 gap-6 py-2">
+
+                  <div class="col-span-2">
+                    <p class="block text-lg font-medium text-gray-700" th:text="${user.getUsername()}">
+                    <p class="mt-1 block text-sm font-normal text-gray-700"
+                      th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}">
+                  </div>
+
+                  <div class="px-4 py-3 text-right">
+                    <a class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-green-600 hover:text-green-700 border-green-600 bg-white-600 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                      th:href="@{/profile}">
+                      View profile
+                    </a>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

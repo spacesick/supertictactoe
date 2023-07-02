@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Join Room</title>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script th:src="@{/js/room.js}" type="text/javascript"></script>
+</head>
+
+<body th:attr="onload='connect(\'' + ${room.getRoomId()} + '\',\'' + ${room.getPlayer2()?.getUsername()} +'\');'">
+<h1>ROOM NAME</h1>
+<h2 class="room-code" th:text="${room.getRoomName()}"></h2>
+<h1>Player 1</h1>
+<div th:if="${room.getPlayer1()} != null">
+<h2 class="room-code" th:text="${room.getPlayer1().getUsername()}"></h2>
+</div>
+<h1>Player 2</h1>
+<div id="player2">
+</div>
+
+<div th:if="${room.getPlayer1().getUserId()} == ${userId}">
+    <label for="size">Select board size:</label>
+    <select name="size" id="size">
+        <option value=3>3x3</option>
+        <option value=4>4x4</option>
+        <option value=5>5x5</option>
+        <option value=6>6x6</option>
+    </select>
+    <label for="length">Select winning length:</label>
+    <select name="length" id="length">
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5</option>
+    </select>
+<h1>LINK TO SHARE</h1>
+<h2>
+    <a class="room-code" th:href="@{/rooms/join/{id}(id=${room.getRoomId()})}" th:target="_blank">
+        Copy and share me to a fellow player!
+    </a>
+</h2>
+        <button th:attr="onclick='start(\'' + ${room.getRoomId()} + '\');'" id="start" style="display: none;">
+            <h1>START THE GAME!</h1>
+        </button>
+</div>
+<div th:if="${room.getPlayer2()} != null">
+    <div th:if="${room.getPlayer2().getUserId()} == ${userId}">
+        <h1 th:text="${'Waiting for ' + room.getPlayer1().getUsername() + ' to start the game...'}"></h1>
+    </div>
+</div>
+<a href="../../rooms">Room List</a>
+</body>
+</html>

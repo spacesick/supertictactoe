@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Edit profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/b99b726463.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div>
+    <div class="grid m-auto max-w-max">
+      <div>
+        <div class="pt-4 px-4">
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Edit your profile</h3>
+        </div>
+      </div>
+      <div class="mt-5 w-screen">
+        <form class="form-card row g-3" id="form" th:action="@{/profile/edit}"
+          th:object="${profile}" method="POST">
+          <div class="shadow">
+            <div class="px-4 py-5 bg-white space-y-6">
+
+              <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-3">
+                  <label class="block text-sm font-medium text-gray-700">
+                    Username
+                  </label>
+                  <div class="mt-1 flex shadow-sm">
+                    <p class="appearance-none rounded-none relative block w-full px-3 py-2 border bg-gray-100 border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-400 focus:border-green-400 focus:z-10"
+                      th:text="${user.getUsername()}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-3">
+                  <label class="block text-sm font-medium text-gray-700">
+                    Email
+                  </label>
+                  <div class="mt-1 flex shadow-sm">
+                    <p class="appearance-none rounded-none relative block w-full px-3 py-2 border bg-gray-100 border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-400 focus:border-green-400 focus:z-10"
+                      th:text="${user.getEmail()}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-3">
+                  <label class="block text-sm font-medium text-gray-700">
+                    First Name
+                  </label>
+                  <div class="mt-1 flex shadow-sm">
+                    <input
+                      class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-400 focus:border-green-400 focus:z-10"
+                      type="text" th:field="*{firstName}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-3">
+                  <label class="block text-sm font-medium text-gray-700">
+                    Last Name
+                  </label>
+                  <div class="mt-1 flex shadow-sm">
+                    <input
+                      class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-400 focus:border-green-400 focus:z-10"
+                      type="text" th:field="*{lastName}" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="px-4 py-3 bg-gray-50 text-right">
+              <a class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-green-600 hover:text-green-700 border-green-600 bg-white-600 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                th:href="@{/profile}">
+                Back to Profile
+              </a>
+              <button type="submit"
+                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                Save Changes
+              </button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div class="block">
+        <div class="py-5">
+          <div class="border-t border-gray-200"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

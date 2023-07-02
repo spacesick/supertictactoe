@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Play Customizable Tic-Tac-Toe Online</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/webjars/jquery/jquery.min.js"></script>
+  <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+  <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+  <script th:src="@{/js/app.js}" type="text/javascript"></script>
+  <script src="https://kit.fontawesome.com/b99b726463.js" crossorigin="anonymous"></script>
+</head>
+
+<body th:attr="onload='connect(\'' + ${game.getId()}+ '\');'">
+  <div class="flex justify-between justify-items-center bg-slate-900">
+
+    <div class="container"></div>
+
+    <div class="justify-items-center">
+
+      <div
+        th:class="'grid w-96 h-96 justify-items-center place-content-center content-around grid-cols-' + ${game.getSize()}">
+        <div th:each="mark, itr: ${game.getMarks()}">
+          <!-- <a th:href="@{/service/{p}/{g}/move(p=0,g=${game.getId()},pos=${itr.index})}"> -->
+          <button type="submit" th:attr="onclick='sendMove(\'' + ${game.getId()} + '\',' + ${itr.index} +');'">
+            <div class="h-16 w-16 bg-slate-200 rounded-md">
+              <div th:id="${itr.index}" th:switch="${mark}">
+                <i th:case="${T(id.ac.ui.cs.supertictactoe.model.Mark).NOUGHT}"
+                  class="fa-regular fa-circle fa-4x"></i>
+                <i th:case="${T(id.ac.ui.cs.supertictactoe.model.Mark).CROSS}"
+                  class="fa-regular fa-xmark fa-4x"></i>
+              </div>
+            </div>
+          </button>
+          <!-- </a> -->
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container">
+      <div id="winner" class="text-gray-100 italic text-xl py-4 px-4">
+        <div th:if="${game.isOver()}">
+          <div th:if="${game.getWinnerIndex() == -1}">
+            <h2>
+              It's a draw, game over!
+            </h2>
+          </div>
+          <div th:unless="${game.getWinnerIndex() == -1}">
+            <h2>
+              Game Over! Winner is:
+            </h2>
+            <h2 th:text="${game.getPlayers()[game.getWinnerIndex()]}">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

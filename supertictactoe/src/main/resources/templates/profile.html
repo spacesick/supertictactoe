@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>View profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/b99b726463.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div>
+    <div class="grid m-auto max-w-max">
+      <div>
+        <div class="pt-4 px-4">
+          <h3 th:text="${user.getUsername() + '''s profile'}" class="text-lg font-medium leading-6 text-gray-900">
+        </div>
+      </div>
+      <div class="mt-5 w-screen">
+        <div class="shadow">
+          <div class="px-4 py-5 bg-white space-y-6">
+
+            <div class="grid grid-cols-3 gap-6">
+              <div class="col-span-3">
+                <label class="block text-sm font-medium text-gray-700">
+                  Username
+                </label>
+                <p class="mt-1 flex shadow-sm" th:text="${user.getUsername()}">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-6">
+              <div class="col-span-3">
+                <label class="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
+                <p class="mt-1 flex shadow-sm" th:text="${user.getEmail()}">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-6">
+              <div class="col-span-3">
+                <label class="block text-sm font-medium text-gray-700">
+                  First Name
+                </label>
+                <p class="mt-1 flex shadow-sm" th:text="${user.getFirstName()}">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-6">
+              <div class="col-span-3">
+                <label class="block text-sm font-medium text-gray-700">
+                  Last Name
+                </label>
+                <p class="mt-1 flex shadow-sm" th:text="${user.getLastName()}">
+              </div>
+            </div>
+
+          </div>
+            <div class="px-4 py-3 bg-gray-50 text-right">
+              <a class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                th:href="@{/profile/edit}">
+                Edit Profile
+              </a>
+            </div>
+
+            <div class="px-4 py-3 bg-gray-50 text-right">
+              <a class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                 th:href="@{/profile/history}">
+                Match History
+              </a>
+            </div>
+
+        </div>
+      </div>
+      <div class="block">
+        <div class="py-5">
+          <div class="border-t border-gray-200"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

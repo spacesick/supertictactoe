@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Match History</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button type="button">
+        <a th:href="@{/profile}">
+            Back to User Profile
+        </a>
+    </button>
+
+    <h2 id="table-title">Match History</h2>
+
+    <table aria-describedby="table-title">
+        <tr>
+            <th>Game ID</th>
+        </tr>
+        <tr th:each="game: ${games}">
+            <td th:text="${game.getId()}" />
+            <td th:text="${game.getPlayers().get(game.getWinnerIndex())}" />
+        </tr>
+    </table>
+</body>
+</html>

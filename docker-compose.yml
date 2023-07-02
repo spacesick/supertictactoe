@@ -1,0 +1,85 @@
+services:
+  supertictactoe:
+    build: ./supertictactoe/
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      GAME_SERVICE_HOST: gameservice:8081
+      FRIEND_SERVICE_HOST: friendservice:8082
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 6s
+        max_attempts: 3
+        window: 150s
+      update_config:
+        parallelism: 1
+        delay: 6s
+        failure_action: rollback
+        monitor: 150s
+        order: stop-first
+      rollback_config:
+        parallelism: 1
+        delay: 6s
+        failure_action: rollback
+        monitor: 150s
+        order: stop-first
+
+  gameservice:
+    build: ./gameservice/
+    restart: always
+    environment:
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 6s
+        max_attempts: 3
+        window: 150s
+      update_config:
+        parallelism: 1
+        delay: 6s
+        failure_action: rollback
+        monitor: 150s
+        order: stop-first
+      rollback_config:
+        parallelism: 1
+        delay: 6s
+        failure_action: rollback
+        monitor: 150s
+        order: stop-first
+
+  friendservice:
+    build: ./friendservice/
+    restart: always
+    environment:
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 6s
+        max_attempts: 3
+        window: 150s
+      update_config:
+        parallelism: 1
+        delay: 6s
+        failure_action: rollback
+        monitor: 150s
+        order: stop-first
+      rollback_config:
+        parallelism: 1
+        delay: 6s
+        failure_action: rollback
+        monitor: 150s
+        order: stop-first

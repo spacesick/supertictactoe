@@ -1,0 +1,53 @@
+type Query {
+  gameById(id: ID!): Game
+  gamesByPlayerUsername(username: String!): [Game]
+}
+
+type Mutation {
+  createGame(gameCreationDTO: GameCreationDTO): Game
+  playerMove(moveDTO: MoveDTO): MoveStatus
+}
+
+input GameCreationDTO {
+  playerUserIds: [ID!]!
+  playerUsernames: [String!]!
+  boardSize: Int!
+  winLength: Int!
+}
+
+input MoveDTO {
+  gameId: ID!
+  index: Int!
+  userId: ID!
+}
+
+type MoveStatus {
+  isValid: Boolean
+  mark: Mark
+  winner: Player
+  isOver: Boolean
+}
+
+type Game {
+  id: ID!
+  marks: [Mark]
+  size: Int
+  winLength: Int
+  players: [Player]
+  currentPlayerTurnIndex: Int
+  winnerIndex: Int
+  isOver: Boolean
+}
+
+type Player {
+  id: ID!
+  userId: ID!
+  username: String!
+  mark: Mark
+}
+
+enum Mark {
+  NONE
+  NOUGHT
+  CROSS
+}
